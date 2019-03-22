@@ -11,7 +11,7 @@ void setupGPS()
   // Request updates on antenna status
   GPS.sendCommand(PGCMD_ANTENNA);
   delay(SETUP_DELAY);
-  //radio.println(F("GPS setup"));
+  radio.println(F("GPS setup"));
 }
 
 void getGPS()

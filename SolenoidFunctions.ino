@@ -8,7 +8,7 @@ void setupSolenoids()
   digitalWrite(SOLENOID_1, HIGH);
   digitalWrite(SOLENOID_2, HIGH);
   digitalWrite(SOLENOID_3, HIGH);
-  //radio.println(F("Solenoids setup"));
+  radio.println(F("Solenoids setup"));
 }
 
 void takeSample(int count)

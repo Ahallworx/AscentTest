@@ -4,7 +4,7 @@ void setupThruster()
   servo.attach(ESC_RC_PW); //attach ESC pin to servo
   servo.writeMicroseconds(STOP_SIGNAL); // send 'stop' signal
   delay(SETUP_DELAY); // delay to allow theESC to recognize stop signal
-  //radio.println(F("Thruster setup"));
+  radio.println(F("Thruster setup"));
 }
 
 void checkThruster()

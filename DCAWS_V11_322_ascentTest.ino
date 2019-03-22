@@ -130,6 +130,7 @@ elapsedMillis gpsTimeout;
 
 void setup()
 {
+  delay(2000);
   char go = 'n';
   //initialize components
   setupRadio();
@@ -138,16 +139,22 @@ void setup()
   setupSD();
   setupSolenoids();
   delay(SETUP_DELAY);
-
-  if (radio.available() > 0) 
-  {
+  radio.println("up signal");
+  while(!radio.available())
+    {
+    } 
+  
     upSignal = radio.parseInt();  // Set signal value, which should be between 1100 and 1900
+    
     if(radio.read() == 'm')
     {
       upSignal = constrain(upSignal, 1100, 1900);
       radio.println(upSignal);          // Print back parsed signal value.
+        digitalWrite(SOLENOID_1, LOW);
+        digitalWrite(SOLENOID_2, LOW);
+        digitalWrite(SOLENOID_3, LOW);
     }  
-  }
+  
   
   //prior to deployment conduct system Diagnosis and wait for user command to continue
   while(go != 'y')
@@ -163,9 +170,7 @@ void setup()
   }
   // once yes has been sent
   // close solenoids
-  digitalWrite(SOLENOID_1, LOW);
-  digitalWrite(SOLENOID_2, LOW);
-  digitalWrite(SOLENOID_3, LOW);
+
   // change to GPS Drift state
   state = ASCENT;
   // begin depth interval timer
@@ -207,7 +212,7 @@ void loop()
       if(state == GPS_FINAL)
         dcawsLog.close();
       pidDepth = avgDepth;
-      checkSafetySensors();
+      //checkSafetySensors();
       sinceDataFreq = 0;
     }
   }
